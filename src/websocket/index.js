@@ -24,7 +24,7 @@ const binanceSocket = async () => {
     if (ticker in markets) {
       const { close: price, change24 } = markets[ticker]
 
-      const arrow = change24.includes('-') ? '↙' : '↗'
+      const arrow = change24.includes('-') ? '⬋' : '⬈'
       const stringPrice = `$${Number(price).toFixed(tickerDecimal)}`
       const stringChange = `${arrow}${change24}%`
 
