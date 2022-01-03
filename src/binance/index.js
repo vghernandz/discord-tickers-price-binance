@@ -4,7 +4,7 @@ const ticker = process.env.TICKER
 
 const pricesGet = async () => {
   schedule.scheduleJob('*/5 * * * * *', async () => {
-    const {data} = await axios.get(`https://api.binance.com/api/v3/ticker/price?symbol=${ticker}`)
+    const {data} = await axios.get(`https://api.binance.com/api/v3/ticker/24hr?symbol=${ticker}`)
 
     console.log(data)
   })
