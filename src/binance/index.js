@@ -14,7 +14,7 @@ const setPriceBinance = async () => {
 
   const arrow = priceChangePercent.includes('-') ? '⬋' : '⬈'
   const stringPrice = `$${Number(lastPrice).toFixed(tickerDecimal)}`
-  const stringChange = `${arrow}${priceChangePercent}%`
+  const stringChange = `${arrow}${priceChangePercent.replace('-', '')}%`
 
   return await discordChangeMessage(`${stringPrice} ${stringChange}`)
 }
