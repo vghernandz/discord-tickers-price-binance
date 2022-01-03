@@ -9,7 +9,7 @@ const discordRunning = async () => {
 
 const discordChangeMessage = async (message) => {
   bot.user.setActivity(message, {
-    type: 'PLAYING'
+    type: 'WATCHING'
   })
 }
 
