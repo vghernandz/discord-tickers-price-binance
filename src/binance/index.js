@@ -1,28 +1,32 @@
-const {discordChangeMessage } = require('../discord')
+const { discordChangeMessage } = require('../discord')
 const schedule = require('node-schedule')
 const axios = require('axios')
 const ticker = process.env.TICKER
 const tickerDecimal = process.env.TICKER_DECIMAL
 
-const pricesGet = async () => {
+const getPriceBinance = async () =>
+  await axios.get(`https://api.binance.com/api/v3/ticker/24hr?symbol=${ticker}`)
+
+const setPriceBinance = async () => {
+  const { data } = await getPriceBinance()
+
+  const { lastPrice, priceChangePercent } = data
+
+  const arrow = priceChangePercent.includes('-') ? '⬋' : '⬈'
+  const stringPrice = `$${Number(lastPrice).toFixed(tickerDecimal)}`
+  const stringChange = `${arrow}${priceChangePercent}%`
+
+  return await discordChangeMessage(`${stringPrice} ${stringChange}`)
+}
+
+const pricePropageDiscord = async () => {
+  await setPriceBinance()
+
   schedule.scheduleJob('*/5 * * * * *', async () => {
-    const {data} = await axios.get(`https://api.binance.com/api/v3/ticker/24hr?symbol=${ticker}`)
-
-    const { lastPrice, priceChangePercent } = data 
-
-      const arrow = priceChangePercent.includes('-') ? '⬋' : '⬈'
-      const stringPrice = `$${Number(lastPrice).toFixed(tickerDecimal)}`
-      const stringChange = `${arrow}${priceChangePercent}%`
-
-      // await discordChangeMessage(`${stringPrice} ${stringChange}`)
-
-    console.log({
-      stringPrice,
-      stringChange
-    })
+    return await setPriceBinance()
   })
 }
 
 module.exports = {
-  pricesGet
+  pricePropageDiscord
 }
