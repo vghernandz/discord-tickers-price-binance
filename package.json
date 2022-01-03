@@ -11,6 +11,7 @@
     "axios": "^0.24.0",
     "discord.js": "^13.2.0",
     "express": "^4.17.1",
+    "node-schedule": "^2.1.0",
     "ws": "^8.2.3"
   },
   "devDependencies": {
