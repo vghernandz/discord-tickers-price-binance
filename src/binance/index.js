@@ -1,3 +1,4 @@
+const {discordChangeMessage } = require('../discord')
 const schedule = require('node-schedule')
 const axios = require('axios')
 const ticker = process.env.TICKER
