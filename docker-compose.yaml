@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  slpust:
+    image: vghernandz/discord-tickers-price-binance:0.3
+    ports: 
+      - 8080:80
+    environment:
+      - TICKER=SLPUSDT
+      - TICKER_DECIMAL=4
+      - TOKEN_DISCORD=here-token-you-bot-discord
+  
+  axsusdt:
+    image: vghernandz/discord-tickers-price-binance:0.3
+    ports: 
+      - 8081:80
+    environment:
+      - TICKER=AXSUSDT
+      - TICKER_DECIMAL=2
+      - TOKEN_DISCORD=here-token-you-bot-discord
